@@ -17,12 +17,12 @@ pipeline {
         }
         stage('NPM:Config') {
             steps{
-  withCredentials([usernamePassword(credentialsId: 'admin', passwordVariable: 'NEXUS_PASSWORD', usernameVariable: 'NEXUS_USERNAME')]) {
+    withCredentials([usernamePassword(credentialsId: 'nexustoken01', passwordVariable: 'Pycube123$', usernameVariable: 'admin')]) {   
     script {
     sh """
     set +x
     # Make an API call to Nexus to get the authentication token
-    token=\$(curl -s -k -X POST -u \$NEXUS_USERNAME:\$NEXUS_PASSWORD http://100.26.159.217:8081/service/rest/v1/security/token)
+    token=\$(curl -s -k -X POST -u \$nexustoken01:\$Pycube123$ http://100.26.159.217:8081/service/rest/v1/security/token)
     echo "//http://100.26.159.217:8081/repository/sonarQube-nodeJS/:_authToken=\$token" >> .npmrc
     """
   }
