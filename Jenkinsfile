@@ -41,7 +41,6 @@ pipeline {
                 // Your npm-related build and install steps here
                 // You can use npm commands without specifying credentials
                 sh 'npm install'
-                sh 'npm run build'
             }
         }
     }
