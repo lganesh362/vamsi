@@ -10,10 +10,11 @@ pipeline {
                 sh 'npm install'
             }
         }
-        stage{
-            withSonarQubeEnv(credentialsId: 'sonar'){
-           sh "npm run sonar"
-		   }
+        stage('sonar'){
+            steps{
+                sh 'npm run sonar'
+            }
         }
     }
 }
+
