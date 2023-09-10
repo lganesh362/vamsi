@@ -18,7 +18,7 @@ pipeline {
         stage('NPM:Config') {
             steps{
                 script {
-                    withCredentials([usernamePassword(credentialsId: 'nexustoken01', passwordVariable: 'Pycube123$', usernameVariable: 'admin')]) {   
+                    withCredentials([usernamePassword(credentialsId: 'nexustoken01', passwordVariable: 'Pycube123$', usernameVariable: 'vamsi_vemula')]) {   
                         sh '''
                             set +x
                             # Make an API call to Nexus to get the authentication token
