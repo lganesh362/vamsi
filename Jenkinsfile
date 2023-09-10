@@ -15,15 +15,16 @@ pipeline {
                 sh 'npm run sonar'
             }
         }
-            stage('UploadArtifcatsintoNexus')
-{
-sh "npm publish"
-}
-
-stage('RunNodeJsApp')
-{
-sh "npm run app.js &"
-}
+           stage('UploadArtifcatsintoNexus'){
+            steps{
+            sh "npm publish"
+            }
+        }
+        stage('RunNodeJsApp'){
+            steps{
+                sh "npm run app.js &"
+            }
+        }
     }
 }
 
