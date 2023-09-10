@@ -34,11 +34,21 @@ pipeline {
         //         sh "npm publish"
         //     }
         // } 
-        stage('Authenticate with npm registry') {
+        // stage('Authenticate with npm registry') {
+        //     steps {
+        //         script {
+        //             // Use the npm adduser command to authenticate
+        //             sh 'npm adduser'
+        //             sh ''
+        //         }
+        //     }
+        // }
+        stage('Configure npm credentials') {
             steps {
                 script {
-                    // Use the npm adduser command to authenticate
-                    sh 'npm adduser'
+                    // Set the registry URL and credentials
+                    sh 'npm config set registry http://100.26.159.217:8081/repository/sonarQube-nodeJS/'
+                    sh 'npm login --registry http://100.26.159.217:8081/repository/sonarQube-nodeJS/ --scope=vamsi.drg1997@gmail.com --always-auth -u vami_vemula -p Pycube123$'
                 }
             }
         }
