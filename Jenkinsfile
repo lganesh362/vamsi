@@ -10,9 +10,10 @@ pipeline {
                 sh 'npm install'
             }
         }
-        stage('ExecuteSonarQubeReport'){
-            withSonarQubeEnv(credentialsId: 'sonar') {
-        sh "npm run sonar"}
+        stage{
+            withSonarQubeEnv(credentialsId: 'sonar'){
+           sh "npm run sonar"
+		   }
         }
     }
 }
