@@ -29,11 +29,29 @@ pipeline {
                 }
             }
         }
-        stage('UploadArtifcatsintoNexus'){
-            steps{
-                sh "npm publish"
+        // stage('UploadArtifcatsintoNexus'){
+        //     steps{
+        //         sh "npm publish"
+        //     }
+        // } 
+        stage('Authenticate with npm registry') {
+            steps {
+                script {
+                    // Use the npm adduser command to authenticate
+                    sh 'npm adduser'
+                }
             }
-        } 
+        }
+        stage('Install and build') {
+            steps {
+                script {
+                    // Run npm install and other npm commands as needed
+                    sh 'npm install'
+                    sh 'npm build'
+                    // Add more npm commands here if necessary
+                }
+            }
+        }
     }
 }
 
