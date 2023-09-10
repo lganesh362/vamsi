@@ -31,7 +31,7 @@ pipeline {
         }
         stage('UploadArtifcatsintoNexus'){
             steps{
-            sh "npm publish"
+                sh "npm publish"
             }
         } 
     }
