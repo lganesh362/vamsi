@@ -16,11 +16,13 @@ pipeline {
             }
         }
         stage('NPM: Config') {
-  withCredentials([usernamePassword(credentialsId: admin, passwordVariable: 'Pycube123$', usernameVariable: 'NEXUS_USERNAME')]) {
-    def token = sh(returnStdout: true, script: "set +x && curl -s -k -H \"Accept: application/json\" -H \"Content-Type:application/json\" -X PUT --data '{\"name\": \"$NEXUS_USERNAME\", \"password\": \"$NEXUS_PASSWORD\"}'
-	http://100.26.159.217:8081/#admin/repository/repositories:sonarQube-nodeJS.user:$NEXUS_USERNAME 2>&1 | grep -po
-	 '(?<=\"token\":\")[^\"]*'")
-    sh "set +x && echo \"//http://100.26.159.217:8081/#admin/repository/repositories:sonarQube-nodeJS/:_authToken=$token\" >> .npmrc"
+  withCredentials([usernamePassword(credentialsId: 'admin', passwordVariable: 'NEXUS_PASSWORD', usernameVariable: 'NEXUS_USERNAME')]) {
+    sh """
+    set +x
+    # Make an API call to Nexus to get the authentication token
+    token=\$(curl -s -k -X POST -u \$NEXUS_USERNAME:\$NEXUS_PASSWORD http://100.26.159.217:8081/service/rest/v1/security/token)
+    echo "//http://100.26.159.217:8081/repository/sonarQube-nodeJS/:_authToken=\$token" >> .npmrc
+    """
   }
 }
            stage('UploadArtifcatsintoNexus'){
