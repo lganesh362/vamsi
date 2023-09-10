@@ -15,8 +15,10 @@ pipeline {
                 sh 'npm run sonar'
             }
         }
-        stage('NPM: Config') {
+        stage('NPM:Config') {
+            steps{
   withCredentials([usernamePassword(credentialsId: 'admin', passwordVariable: 'NEXUS_PASSWORD', usernameVariable: 'NEXUS_USERNAME')]) {
+    script {
     sh """
     set +x
     # Make an API call to Nexus to get the authentication token
@@ -25,6 +27,8 @@ pipeline {
     """
   }
 }
+            }
+        }
            stage('UploadArtifcatsintoNexus'){
             steps{
             sh "npm publish"
