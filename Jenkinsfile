@@ -19,12 +19,7 @@ pipeline {
             steps{
             sh "npm publish"
             }
-        }
-        stage('RunNodeJsApp'){
-            steps{
-                sh "npm run app.js &"
-            }
-        }
+        } 
     }
 }
 
